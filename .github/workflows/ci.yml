@@ -6,6 +6,11 @@ jobs:
       matrix:
         python-version: [3.7, 3.8, 3.9]
         coverage: [true, false]
+        exclude:
+          - python-version: 3.8
+            coverage: true
+          - python-version: 3.9
+            coverage: true
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2

@@ -22,7 +22,14 @@ jobs:
       run: pip install -U pytest pytest-cov
     - name: Run tests
       if: matrix.coverage == false
-      run: echo "tests"
+      run: |
+        echo "tests ${{ matrix.python-version }}" > artifact-${{ matrix.python-version }}.txt
     - name: Coverage tests
       if: matrix.coverage
       run: echo "coverage tests"
+    - name: Test artifact
+      if: matrix.coverage == false
+      uses: actions/upload-artifact@v2
+      with:
+        name: Artifact ${{ matrix.python-version }}
+        path: artifact*.txt
